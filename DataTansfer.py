@@ -41,10 +41,10 @@ def Add_History(stock_id):
             everyday = dict(id = row['stock_code_id'], date = datetime.datetime.utcfromtimestamp(int(row['date'])).strftime('%Y-%m-%d'), 
                             high = row['high'], low = data['low'], close = row['close'], volume = row['transaction_volume'])
             objects.append(everyday)
-        Session.bulk_insert_mappings(History, everyday)
+        Session.bulk_insert_mappings(History, objects)
         Session.commit()
         print(stock_id, 'done.')
     else:
         print(stock_id, ' error.')
 
-Add_History()
+Add_History('2330')

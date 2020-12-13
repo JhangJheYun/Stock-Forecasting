@@ -1,0 +1,5 @@
+# Stock-Forecasting
+
+```
+pipenv install
+```

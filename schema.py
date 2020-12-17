@@ -19,4 +19,19 @@ class History(Base):
     high = Column(FLOAT)
     low = Column(FLOAT)
     close = Column(FLOAT)
-    volumn = Column(INT)
+    volume = Column(INT)
+
+    def __init__(self, id, date, high, low, close, volume):
+        self.id = id
+        self.date = date
+        self.high = high
+        self.low = low
+        self.close = close
+        self.volume = volume
+
+class Analysis(Base):
+
+    __tablename__ = 'analysis'
+
+    id = Column(INT, primary_key=True)
+    

@@ -6,9 +6,10 @@ name = "pypi"
 [packages]
 requests = "*"
 sqlalchemy = "*"
-psycopg2-binary = "*"
 pandas = "*"
 lxml = "*"
+psycopg2-binary = "*"
+sklearn = "*"
 
 [dev-packages]
 pylint = "*"

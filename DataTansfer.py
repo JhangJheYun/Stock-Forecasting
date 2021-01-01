@@ -193,6 +193,7 @@ def clustering(conn, cur):
     for i in max_num_index_list:
         print(i, ':', stock_id[i])
     
+    print(kmeans.cluster_centers_)
 
 
 if __name__ == "__main__":
@@ -205,9 +206,10 @@ if __name__ == "__main__":
     # stocks = cur.fetchall()
     # today = datetime.date.today()
     # tomorrow = today + datetime.timedelta(days = 1)
+    # a = today - datetime.timedelta(days = 11)
     # three_years_ago = today - relativedelta(years = 3)
     # for stock in stocks:
-    #     Add_History(conn, cur, stock[0], three_years_ago.strftime('%Y%m%d'), today.strftime('%Y%m%d'))
+    #     Add_History(conn, cur, stock[0], a.strftime('%Y%m%d'), tomorrow.strftime('%Y%m%d'))
     
     # Add_Analysis()
     # cur.execute("SELECT * FROM stock")

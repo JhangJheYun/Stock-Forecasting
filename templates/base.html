@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>  
+  
+    <head>
+      <title>股價分析網</title>     
+      <link rel="stylesheet" type="text/css" href="static/css/navbar.css">
+      <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+      <link rel="stylesheet" type="text/css" href="static/css/style.css">
+      <link rel="stylesheet" type="text/css" href="static/css/layout.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- datatable -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">  
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- k-line javascript -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4/dist/echarts.min.js"></script>
+       <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@1/dist/echarts-gl.min.js"></script> -->
+       <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@1/dist/ecStat.min.js"></script> -->
+       <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4/dist/extension/dataTool.min.js"></script> -->
+       <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4/map/js/china.js"></script> -->
+       <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4/map/js/world.js"></script> -->
+       <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script> -->
+       <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4/dist/extension/bmap.min.js"></script> -->
+       
+
+  
+    </head>      
+      <p>
+       <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+              <div class="navbar-header">            
+                <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/twstock">TW Stock</a></li>
+                        <li><a href="/twstock/cluster">Choose Stock</a></li>
+                       
+                    </ul>
+                </div>
+          </div>
+      </nav>  
+      </p>
+   <br>
+   <br>
+   <br>
+   <br>
+       
+      {% block main %}
+      {% endblock %}
+   
+</html>

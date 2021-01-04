@@ -4,12 +4,88 @@ import datetime
 import time
 import gc
 import numpy as np
-import psycopg2
+# import psycopg2
 import os
 from io import StringIO
-from config import Session
+# from config import Session
 from schema import Stock, History
-from utils import analysis_error
+from utils import analysis_error, clustering
+from connect_database import connect_db
+# from stock_predict import get_stock_name
+
+def Get_Cluster_Stocks():
+    """Get cluster of different risk stocks, 5 stocks each risk cluster """
+    conn = connect_db()
+    cur = conn.cursor()
+    stocks = clustering(conn, cur)
+    # cur.close()
+    print(stocks)
+
+    for risk_list in stocks:
+        for idx, stock_id in enumerate(risk_list):
+            cur.execute(f"select name from stock where id = {stock_id};")
+            data = cur.fetchall()
+            stock_name = str(data[0])
+            stock_name = stock_name[2:-3]
+            # stock_name = get_stock_name(stock_id)
+            risk_list[idx] = stock_name + '(' + str(stock_id) + ')'
+    cur.close()
+
+    low_risk_list = stocks[0]
+    mid_risk_list = stocks[1]
+    high_risk_list = stocks[2]
+    return low_risk_list, mid_risk_list, high_risk_list
+
+def Is_latest():
+    latest_date = get_latest_history_date()
+    # today_week_day = datetime.date.weekday()
+    # latest_week_day = latest_date.weekday()
+    stock_id = '2330'
+    start = (latest_date + datetime.timedelta(days = 1)).strftime('%Y%m%d')
+    today = datetime.date.today()
+    end = (today + datetime.timedelta(days = 1)).strftime('%Y%m%d')
+    data = requests.get('http://140.116.86.241:15000/api/v1/bargain_data/' + f'{stock_id}' + '/' + f'{start}' + '/' + f'{end}')
+    if data.status_code != 200:
+        return True
+    else:
+        return False 
+
+def get_latest_history_date():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute('SELECT date FROM history WHERE id = 2330 ORDER BY date DESC LIMIT 1 ;')
+    latest_date = cur.fetchall()[0][0]
+    cur.close()
+    print(latest_date)
+    return latest_date
+
+def Update_All_Stock():
+    """Update history info of all stocks"""
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute('SELECT id FROM stock;')
+    stocks = cur.fetchall()
+    today = datetime.date.today()
+    tomorrow = today + datetime.timedelta(days = 1)
+    # three_years_ago = today - relativedelta(years = 3)
+    latest_date = get_latest_history_date() + datetime.timedelta(days = 1)
+
+    for stock in stocks:
+        Add_History(conn, cur, stock[0], latest_date.strftime('%Y%m%d'), tomorrow.strftime('%Y%m%d'))
+    cur.close()
+    print('Update all stock history success')
+
+def Update_All_Analysis():
+    """Update analysis info of all stocks"""
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM stock;')
+    stocks = cur.fetchall()
+
+    for stock in stocks:
+        Add_Analysis(conn, cur, stock[0])
+    cur.close()
+    print('Update all analysis success')
 
 def Connect_MM_DB(stock_id, start, end):
     data = requests.get('http://140.116.86.241:15000/api/v1/bargain_data/' + stock_id + '/' + start + '/' + end)

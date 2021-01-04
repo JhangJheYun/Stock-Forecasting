@@ -24,7 +24,10 @@ def interval(ma, close):
 
 
 def clustering(conn, cur):
-
+    """ 挑出低中高三種風險的股票
+        output已經sort過，[[低風險], [中風險], [高風險]]
+        每個風險有五支股票，要取低風險第一就是stocks[0][0]
+    """
     cur.execute("SELECT amplitude, close_trend, volume_trend, id, \
                 ma_5, ma_20, ma_60, ma_120, ma_240, last_close FROM analysis")
     trend = cur.fetchall()

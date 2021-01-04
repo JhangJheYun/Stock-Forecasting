@@ -1,0 +1,13 @@
+{% extends 'base.html'  %}
+
+<link rel="stylesheet" type="text/css" href="static/css/button_link.css">
+
+{% block main %}
+<form action="/twstock" method = 'GET' class="cluster">
+<div>High Risk Stocks : {% for stock in high_risk_list %} <button class='btn-link' name="stock_id" value={{stock}}>{{stock}}</button> {% endfor %}</div> 
+<br> 
+<div>Midium Risk Stocks : {% for stock in mid_risk_list %} <button class='btn-link' name="stock_id" value={{stock}}>{{stock}}</button> {% endfor %}</div> 
+<br>
+<div>Low Risk Stocks : {% for stock in low_risk_list %} <button class='btn-link' name="stock_id" value={{stock}}>{{stock}}</button> {% endfor %}</div> 
+</form>
+{% endblock %}

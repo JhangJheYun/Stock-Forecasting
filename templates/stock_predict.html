@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<link rel="stylesheet" type="text/css" href="static/css/searchbar.css">
+<link rel="stylesheet" type="text/css" href="static/css/cluster.css">
+
+<br>
+<br>
+
+<body>
+<form method = 'POST' action="">
+    <div class="wrap">
+        <div class="search">
+                <input type="text" class="searchTerm" placeholder="Which stock id to search?" name = 'stock_id' value = {{stock_id}}>
+                <button type="submit" class="searchButton" >search</button> 
+        </div>
+    </div>
+     
+    <label for="start_date">Start date:</label>
+    <input type="date" id="start_date" name="start_date" 
+        value={{start_date}}
+        max={{current_date}}>
+    <br>
+    <input type="radio" id="OtO" name="model_type" value="OtO">
+    <label for="OtO">LSTM(One to One)</label>
+    <input type="radio" id="MtO" name="model_type" value="MtO">
+    <label for="MtO">LSTM(Many to One)</label>
+    <input type="radio" id="MtM" name="model_type" value="MtM">
+    <label for="MtM">LSTM(Many to Many)</label>
+    <input type="radio" id="GRU" name="model_type" value="GRU">
+    <label for="GRU">GRU</label>
+
+</form>
+
+<!-- <img src= "{{url_for('static', filename='media/k_line.png')}}"  /> -->
+
+{% if k_line_info %}
+<b>{{stock_name}}({{stock_id}})</b>
+<br>
+ stock price prediction of {{predict_date}}: <b>{{predict_low}} - {{predict_high}}</b>
+ <br>
+ <br>
+<div id="container" style="height: 100%"></div>
+<script>var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    </script>
+<script type="text/javascript">var rawData = {{k_line_info|tojson}};</script>    
+<script type="text/javascript" src="{{url_for('static', filename='js/k_line.js')}}" ></script>
+
+<script>if (option && typeof option === "object") {
+    myChart.setOption(option, true);}
+</script>
+{% endif %}
+</body>
+{% endblock %}

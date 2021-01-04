@@ -5,15 +5,18 @@ name = "pypi"
 
 [packages]
 requests = "*"
-sqlalchemy = "*"
-pandas = "*"
-lxml = "*"
+flask = "*"
 psycopg2-binary = "*"
+pandas = "*"
+keras = "*"
 sklearn = "*"
+tqdm = "*"
+sqlalchemy = "*"
+cython = "*"
+scikit-learn = "==0.22.1"
+tensorflow = "==2.2.0"
 
 [dev-packages]
-pylint = "*"
-python-dotenv = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.7.7"
